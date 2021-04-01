@@ -176,7 +176,7 @@ export class CoinbaseProvider {
   }
 
   private getData(): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       this.persistenceProvider
         .getCoinbase(this.environment)
         .then(data => {
@@ -245,7 +245,7 @@ export class CoinbaseProvider {
   }
 
   private doRefreshToken(): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       if (this.isRefreshingToken) {
         return reject('Refresh Token is in progress. Wait...');
       }
@@ -298,7 +298,7 @@ export class CoinbaseProvider {
     });
 
     this.logger.debug('Coinbase: Getting Token...');
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       if (!this.isEnabled()) {
         return reject('Coinbase is Disabled. Missing credentials.');
       }

@@ -104,7 +104,7 @@ export class ScanProvider {
    * The `status` of QRScanner is returned to the callback.
    */
   public gentleInitialize(): Promise<any> {
-    return new Promise(resolve => {
+    return new Promise((resolve: any) => {
       if (this.initializeStarted && !this.isDesktop) {
         this.qrScanner.getStatus().then(status => {
           this.completeInitialization(status);
@@ -145,7 +145,7 @@ export class ScanProvider {
   }
 
   public initialize(): Promise<any> {
-    return new Promise(resolve => {
+    return new Promise((resolve: any) => {
       this.logger.info('Initializing scanner...');
       this.qrScanner
         .prepare()
@@ -192,7 +192,7 @@ export class ScanProvider {
    * is complete.
    */
   public activate(): Promise<any> {
-    return new Promise(resolve => {
+    return new Promise((resolve: any) => {
       this.logger.info('Activating scanner...');
       this.qrScanner.show().then(status => {
         this.initializeCompleted = true;

@@ -28,7 +28,7 @@ export class BackupProvider {
     opts,
     password?: string
   ): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       let config = this.configProvider.get();
 
       let wallet = this.profileProvider.getWallet(walletId);

@@ -154,7 +154,7 @@ export class WalletExportPage {
   }
 
   public getAddressBook(): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       this.persistenceProvider
         .getAddressBook(this.wallet.credentials.network)
         .then(localAddressBook => {
@@ -177,7 +177,7 @@ export class WalletExportPage {
   }
 
   private getBackup(): Promise<any> {
-    return new Promise(resolve => {
+    return new Promise((resolve: any) => {
       this.getPassword()
         .then((password: string) => {
           this.getAddressBook()

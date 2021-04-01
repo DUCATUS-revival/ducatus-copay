@@ -17,12 +17,12 @@ import * as _ from 'lodash';
   templateUrl: 'lock.html'
 })
 export class LockPage {
-  public options: Array<{
+  public options: {
     label: string;
     method: string;
     enabled: boolean;
     disabled: boolean;
-  }> = [];
+  }[] = [];
   public lockOptions;
   public needsBackupMsg: string;
 

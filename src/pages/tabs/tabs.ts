@@ -164,7 +164,7 @@ export class TabsPage {
     const today = moment();
     const availableChains = this.currencyProvider.getAvailableChains();
     const ts = today.subtract(23, 'hours').unix() * 1000;
-    return new Promise(resolve => {
+    return new Promise((resolve: any) => {
       this.exchangeRatesProvider
         .getHistoricalRates(this.totalBalanceAlternativeIsoCode)
         .subscribe(

@@ -526,7 +526,7 @@ export class ProfileProvider {
       date = new Date(Number(groupBackupInfo.timestamp));
     this.logger.info(
       `Binding wallet: ${wallet.id} - Backed up: ${!needsBackup} ${
-      date ? date : ''
+        date ? date : ''
       } - Encrypted: ${wallet.isPrivKeyEncrypted} - Token: ${!!wallet
         .credentials.token}`
     );
@@ -575,7 +575,7 @@ export class ProfileProvider {
           return;
         }
         wallet.setNotificationsInterval(this.UPDATE_PERIOD);
-        wallet.openWallet(() => { });
+        wallet.openWallet(() => {});
       }
     );
     this.events.subscribe('Local/ConfigUpdate', opts => {
@@ -940,7 +940,7 @@ export class ProfileProvider {
   }
 
   private checkIfAlreadyExist(walletClients: any[]): Promise<any> {
-    return new Promise(resolve => {
+    return new Promise((resolve: any) => {
       const countInArray = _.filter(walletClients, item => item == undefined)
         .length;
       if (countInArray > 0) {
@@ -1027,7 +1027,7 @@ export class ProfileProvider {
   }
 
   private setMetaData(wallet, addressBook): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       this.persistenceProvider
         .getAddressBook(wallet.credentials.network)
         .then(localAddressBook => {
@@ -1304,7 +1304,7 @@ export class ProfileProvider {
   }
 
   public isDisclaimerAccepted(): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       const disclaimerAccepted =
         this.profile && this.profile.disclaimerAccepted;
       if (disclaimerAccepted) return resolve();
@@ -1365,7 +1365,7 @@ export class ProfileProvider {
   }
 
   public loadAndBindProfile(): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       this.persistenceProvider
         .getProfile()
         .then(profile => {
@@ -1453,7 +1453,7 @@ export class ProfileProvider {
   }
 
   private seedWallet(opts?): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       opts = opts ? opts : {};
       opts['bp_partner'] = this.appProvider.info.name;
       opts['bp_partner_version'] = this.appProvider.info.version;
@@ -1789,8 +1789,7 @@ export class ProfileProvider {
       let erc20TokenObjs = this.currencyProvider.getAvailableTokens();
       let drc20TokenObjs = this.currencyProvider.getDRCAvailableTokens();
 
-
-      const ERC20Tokens = tokens.filter((token) => {
+      const ERC20Tokens = tokens.filter(token => {
         token = erc20TokenObjs.find(x => x.symbol == token);
         return !!token;
       });
@@ -1798,14 +1797,13 @@ export class ProfileProvider {
         reject('No ethereum wallets for tokens');
       }
 
-      const DRC20Tokens = tokens.filter((token) => {
+      const DRC20Tokens = tokens.filter(token => {
         token = drc20TokenObjs.find(x => x.symbol == token);
         return !!token;
       });
       if (DRC20Tokens && DRC20Tokens.length && coins.indexOf('ducx') < 0) {
         reject('No DucatusX wallets for tokens');
       }
-
 
       const defaultOpts = this.getDefaultWalletOpts(coins[0]);
 
@@ -1853,7 +1851,6 @@ export class ProfileProvider {
                 });
                 walletClients = walletClients.concat(drcTokenClients);
               }
-
 
               this.addAndBindWalletClients({
                 key: firstWalletData.key,
@@ -2053,8 +2050,9 @@ export class ProfileProvider {
 
       ret = ret.filter(
         wallet =>
-          !tokenWalletIds.includes(`${wallet.id}-${opts.pairFor.address}`) &&
-          wallet.coin === opts.pairFor.blockchain || 'eth'
+          (!tokenWalletIds.includes(`${wallet.id}-${opts.pairFor.address}`) &&
+            wallet.coin === opts.pairFor.blockchain) ||
+          'eth'
       );
     }
 

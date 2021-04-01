@@ -35,7 +35,7 @@ export class ExternalLinkProvider {
     okText?: string,
     cancelText?: string
   ) {
-    return new Promise(resolve => {
+    return new Promise((resolve: any) => {
       if (optIn) {
         this.popupProvider
           .ionicConfirm(title, message, okText, cancelText)

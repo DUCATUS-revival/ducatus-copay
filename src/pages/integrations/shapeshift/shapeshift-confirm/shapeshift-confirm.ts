@@ -485,7 +485,7 @@ export class ShapeshiftConfirmPage {
   }
 
   private showSendMaxWarning(): Promise<any> {
-    return new Promise(resolve => {
+    return new Promise((resolve: any) => {
       let fee = this.sendMaxInfo.fee / this.precisionFromWallet.unitToSatoshi;
       let msg = this.replaceParametersProvider.replace(
         this.translate.instant(

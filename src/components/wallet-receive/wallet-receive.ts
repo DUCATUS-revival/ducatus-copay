@@ -162,7 +162,7 @@ export class WalletReceiveComponent extends ActionSheetParent {
   }
 
   private setupSheet<T extends ActionSheetParent>(
-    componentType: { new (...args): T },
+    componentType: new (...args) => T,
     sheetType?: string,
     params?
   ): ComponentRef<T> {

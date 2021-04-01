@@ -14,9 +14,7 @@ export class DomProvider {
     protected appRef: ApplicationRef
   ) {}
 
-  public appendComponentToBody<T>(component: {
-    new (...args): T;
-  }): ComponentRef<T> {
+  public appendComponentToBody<T>(component: new (...args) => T): ComponentRef<T> {
     const componentRef = this.componentFactoryResolver
       .resolveComponentFactory<T>(component)
       .create(this.injector);

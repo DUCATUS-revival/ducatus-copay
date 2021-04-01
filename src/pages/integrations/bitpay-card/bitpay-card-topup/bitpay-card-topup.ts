@@ -190,7 +190,7 @@ export class BitPayCardTopUpPage {
   }
 
   private showError(title: string, msg): Promise<any> {
-    return new Promise(resolve => {
+    return new Promise((resolve: any) => {
       if (this.isCordova) this.slideButton.isConfirmed(false);
       title = title || this.translate.instant('Error');
       this.logger.error(msg);

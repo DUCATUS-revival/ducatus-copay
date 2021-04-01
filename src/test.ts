@@ -272,12 +272,12 @@ export class TestUtils {
   }
 
   public static configureProviderTestingModule(
-    providerOverrides: Array<{
+    providerOverrides: {
       provide;
       useClass?;
       useValue?;
       useFactory?: (...args) => any;
-    }> = []
+    }[] = []
   ) {
     return TestBed.configureTestingModule({
       imports: [...baseImports, ProvidersModule],

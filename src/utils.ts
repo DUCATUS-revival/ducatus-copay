@@ -1,4 +1,4 @@
-export function promiseSerial(tasks: Array<() => Promise<any>>) {
+export function promiseSerial(tasks: (() => Promise<any>)[]) {
   return tasks.reduce(
     (promise, currentTask) =>
       promise.then(result =>

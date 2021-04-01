@@ -31,7 +31,7 @@ export class PendingTxpMock {
     hasActivity: boolean;
     _id: string;
   };
-  inputs: Array<{
+  inputs: {
     txid: string;
     vout: number;
     address: string;
@@ -41,7 +41,7 @@ export class PendingTxpMock {
     locked: boolean;
     path: string;
     publicKeys: string[];
-  }>;
+  }[];
   walletM: number;
   walletN: number;
   requiredSignatures: number;

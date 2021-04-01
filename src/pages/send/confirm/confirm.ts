@@ -486,7 +486,7 @@ export class ConfirmPage {
   }
 
   private updateTx(tx, wallet, opts): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       if (opts.clearCache) {
         tx.txp = {};
       }
@@ -583,7 +583,7 @@ export class ConfirmPage {
   }
 
   private useSendMax(tx, wallet, opts) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       this.getSendMaxInfo(_.clone(tx), wallet)
         .then(sendMaxInfo => {
           if (sendMaxInfo) {
@@ -682,7 +682,7 @@ export class ConfirmPage {
   }
 
   private buildTxp(tx, wallet, opts): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       this.getTxp(_.clone(tx), wallet, opts.dryRun)
         .then(txp => {
           if (this.currencyProvider.isUtxoCoin(tx.coin)) {
@@ -716,7 +716,7 @@ export class ConfirmPage {
   }
 
   private getSendMaxInfo(tx, wallet): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       if (!tx.sendMax) return resolve();
 
       this.onGoingProcessProvider.set('retrievingInputs');

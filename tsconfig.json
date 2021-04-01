@@ -15,7 +15,18 @@
     "sourceMap": true,
     "target": "es6",
     "baseUrl": "./",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    // "module": "esnext",
+    // "moduleResolution": "node",
+    // "target": "es6",
+    "removeComments": true,
+    "resolveJsonModule": true
+    // "importHelpers": true,
+    // "noErrorTruncation": true,
+    // "strict": true
+    // "noUnusedLocals": true,
+    // "noUnusedParameters": true,
+    // "noImplicitReturns": true
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"],

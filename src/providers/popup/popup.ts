@@ -16,7 +16,7 @@ export class PopupProvider {
     subTitle?: string,
     okText?: string
   ): Promise<any> {
-    return new Promise(resolve => {
+    return new Promise((resolve: any) => {
       let alert = this.alertCtrl.create({
         title,
         subTitle,

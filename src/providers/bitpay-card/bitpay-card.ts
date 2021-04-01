@@ -471,7 +471,7 @@ export class BitPayCardProvider {
 
   public get(opts?): Promise<any> {
     opts = opts || {};
-    return new Promise(resolve => {
+    return new Promise((resolve: any) => {
       this.getCards(cards => {
         if (_.isEmpty(cards)) {
           this.homeIntegrationsProvider.updateLink('debitcard', null); // Name, linked

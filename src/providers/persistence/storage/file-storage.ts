@@ -12,7 +12,7 @@ export class FileStorage implements IStorage {
   constructor(private file: File, private log: Logger) {}
 
   init(): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       if (this.fs && this.dir) return resolve();
 
       const onSuccess = (fs: FileSystem): Promise<any> => {
@@ -81,7 +81,7 @@ export class FileStorage implements IStorage {
   }
 
   get(k: string): Promise<any> {
-    return new Promise(resolve => {
+    return new Promise((resolve: any) => {
       this.init()
         .then(() => {
           this.file
@@ -114,7 +114,7 @@ export class FileStorage implements IStorage {
       this.init().then(() => {
         this.file.getFile(this.dir, k, { create: true }).then(fileEntry => {
           // Create a FileWriter object for our FileEntry (log.txt).
-          return new Promise((resolve, reject) => {
+          return new Promise((resolve: any, reject) => {
             fileEntry.createWriter(fileWriter => {
               fileWriter.onwriteend = () => {
                 this.log.debug('Successful file write...');

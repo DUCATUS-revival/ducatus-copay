@@ -18,7 +18,7 @@ export class AddressBookProvider {
   }
 
   public get(addr: string): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       this.persistenceProvider
         .getAddressBook('testnet')
         .then(ab => {

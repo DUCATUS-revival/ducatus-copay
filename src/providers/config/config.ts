@@ -7,7 +7,7 @@ import { PersistenceProvider } from '../persistence/persistence';
 import * as _ from 'lodash';
 
 export interface Config {
-  isProduction: boolean,
+  isProduction: boolean;
   limits: {
     totalCopayers: number;
     mPlusN: number;
@@ -256,7 +256,7 @@ export class ConfigProvider {
   }
 
   public load() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       this.persistence
         .getConfig()
         .then((config: Config) => {

@@ -23,7 +23,7 @@ export class FeedbackProvider {
   }
 
   public send(dataSrc): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       if (!this.URL) return resolve();
 
       const headers = new HttpHeaders({

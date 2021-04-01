@@ -9,7 +9,7 @@ export class DownloadProvider {
   }
 
   public download(ew, fileName: string): Promise<any> {
-    return new Promise(async resolve => {
+    return new Promise(async (resolve: any) => {
       await Observable.timer(1000).toPromise();
       let a = document.createElement('a');
       let blob = this.newBlob(ew, 'text/plain;charset=utf-8');

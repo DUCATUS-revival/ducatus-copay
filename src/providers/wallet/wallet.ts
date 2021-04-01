@@ -59,12 +59,12 @@ export interface TransactionProposal {
   amount: any;
   from: string;
   toAddress: any;
-  outputs: Array<{
+  outputs: {
     toAddress: any;
     amount: any;
     message: string;
     data?: string;
-  }>;
+  }[];
   inputs: any;
   fee: any;
   message: string;
@@ -274,7 +274,7 @@ export class WalletProvider {
       }
     };
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       this.getKeysWithFixes(parsedFile).then(savedKeys => {
         const existsKey = savedKeys.filter(k => {
           return k.xPubKey === walletXPubStr;
@@ -800,7 +800,7 @@ export class WalletProvider {
     progressFn,
     opts: HistoryOptionsI = {}
   ): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       opts = opts || {};
       const FIRST_LIMIT = 5;
       const LIMIT = 100;
@@ -868,7 +868,7 @@ export class WalletProvider {
             skip: number,
             tries: number = 0
           ): Promise<any> => {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve: any, reject) => {
               this.fetchTxsFromServer(wallet, skip, endingTxid, requestLimit)
                 .then(result => {
                   const res = result.res;
@@ -947,7 +947,7 @@ export class WalletProvider {
               });
 
               const updateNotes = (): Promise<any> => {
-                return new Promise((resolve, reject) => {
+                return new Promise((resolve: any, reject) => {
                   if (!endingTs) return resolve();
 
                   // this.logger.debug('Syncing notes from: ' + endingTs);
@@ -1219,7 +1219,7 @@ export class WalletProvider {
     progressFn,
     opts: HistoryOptionsI = {}
   ): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       opts = opts || {};
 
       if (!wallet.isComplete()) return resolve();
@@ -1376,7 +1376,7 @@ export class WalletProvider {
 
   // updates local and remote prefs for 1 wallet
   public updateRemotePreferencesFor(client, prefs): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       client.preferences = client.preferences || {};
       if (!_.isEmpty(prefs)) {
         _.assign(client.preferences, prefs);
@@ -1425,7 +1425,7 @@ export class WalletProvider {
   }
 
   public recreate(wallet): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       this.logger.info('Recreating wallet:', wallet.id);
       wallet.recreateWallet(err => {
         wallet.notAuthorized = false;
@@ -1436,7 +1436,7 @@ export class WalletProvider {
   }
 
   public startScan(wallet): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       this.logger.info('Scanning wallet ' + wallet.id);
       if (!wallet.isComplete())
         return reject('Wallet incomplete: ' + wallet.name);
@@ -1460,7 +1460,7 @@ export class WalletProvider {
   }
 
   public expireAddress(walletId: string): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       this.logger.info('Cleaning Address ' + walletId);
       this.persistenceProvider
         .clearLastAddress(walletId)
@@ -1530,7 +1530,7 @@ export class WalletProvider {
       resolve({
         wallet: walletToSend,
         pubKey: publicKey,
-        path: addressData.path,
+        path: addressData.path
       });
     });
   }
@@ -1760,7 +1760,7 @@ export class WalletProvider {
   }
 
   public onlyPublish(wallet, txp): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       this.publishTx(wallet, txp)
         .then(() => {
           this.invalidateCache(wallet);
@@ -1902,7 +1902,7 @@ export class WalletProvider {
   }
 
   public getEncodedWalletInfo(wallet, password?: string): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       if (!wallet.credentials.keyId) {
         return resolve();
       }
@@ -2048,7 +2048,7 @@ export class WalletProvider {
   }
 
   public copyCopayers(wallet: any, newWallet: any): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       let walletPrivKey = this.bwcProvider
         .getBitcore()
         .PrivateKey.fromString(wallet.credentials.walletPrivKey);

@@ -67,7 +67,7 @@ export class FeeProvider {
     network: string,
     feeLevel: string
   ): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve: any, reject) => {
       if (feeLevel == 'custom') return resolve();
       network = network || 'livenet';
       this.getFeeLevels(coin)
