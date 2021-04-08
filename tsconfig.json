@@ -19,8 +19,8 @@
     // "module": "esnext",
     // "moduleResolution": "node",
     // "target": "es6",
-    "removeComments": true,
-    "resolveJsonModule": true
+    "removeComments": true
+    // "resolveJsonModule": true
     // "importHelpers": true,
     // "noErrorTruncation": true,
     // "strict": true

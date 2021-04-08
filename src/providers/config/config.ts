@@ -137,7 +137,7 @@ export class ConfigProvider {
   ) {
     this.logger.debug('ConfigProvider initialized');
     this.configDefault = {
-      isProduction: false,
+      isProduction: true,
       // wallet limits
       limits: {
         totalCopayers: 6,

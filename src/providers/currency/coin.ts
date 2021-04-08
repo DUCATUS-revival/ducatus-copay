@@ -1,3 +1,4 @@
+import ApiProvider from '../../providers/api/api';
 import { CoinsMap } from './currency';
 
 export interface CoinOpts {
@@ -41,6 +42,8 @@ export interface CoinOpts {
   };
 }
 
+const apiProvider: ApiProvider = new ApiProvider();
+
 export const availableCoins: CoinsMap<CoinOpts> = {
   duc: {
     name: 'Ducatus',
@@ -63,7 +66,7 @@ export const availableCoins: CoinsMap<CoinOpts> = {
     paymentInfo: {
       paymentCode: 'BIP73',
       protocolPrefix: { livenet: 'ducatus', testnet: 'ducatus' },
-      ratesApi: 'https://rates.ducatuscoins.com/api/v1/rates/',
+      ratesApi: apiProvider.getAddresses().ratesApi,
       blockExplorerUrls: 'insight.ducatus.io/#/DUC/'
     },
     feeInfo: {
@@ -98,7 +101,7 @@ export const availableCoins: CoinsMap<CoinOpts> = {
     paymentInfo: {
       paymentCode: 'EIP681',
       protocolPrefix: { livenet: 'ducatusx', testnet: 'ducatusx' },
-      ratesApi: 'https://rates.ducatuscoins.com/api/v1/rates/',
+      ratesApi: apiProvider.getAddresses().ratesApi,
       blockExplorerUrls: 'insight.ducatus.io/#/DUCX/'
     },
     feeInfo: {
