@@ -43,7 +43,6 @@ export interface CoinOpts {
 }
 
 const apiProvider: ApiProvider = new ApiProvider();
-
 export const availableCoins: CoinsMap<CoinOpts> = {
   duc: {
     name: 'Ducatus',
