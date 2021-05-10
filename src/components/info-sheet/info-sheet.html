@@ -118,6 +118,39 @@
       </span>
     </info-sheet-template>
 
+    <info-sheet-template *ngSwitchCase="'dex-list'">
+      <span sheet-title-text>Select Coin</span>
+
+      <span sheet-text>
+        <ion-searchbar
+          style="box-shadow: none; padding-top: 0;"
+          (ionInput)="filterList($event)"
+        ></ion-searchbar>
+
+        <ion-list>
+          <div
+            style="display: flex; align-items: center; margin-top: 20px; cursor: poiner;"
+            *ngFor="let item of params.list"
+            (click)="optionClicked(item)"
+          >
+            <img
+              width="40"
+              height="40"
+              [src]="'assets/img/dex/'+ item.short +'.svg'"
+            />
+            <div
+              style="display: flex;flex-direction:column; padding-left: 10px;"
+            >
+              <span style="color: black; font-size: 16px;margin-bottom:5px;"
+                >{{ item.name }}</span
+              >
+              <span style="color:gray;font-size:14px;">{{ item.short }}</span>
+            </div>
+          </div>
+        </ion-list>
+      </span>
+    </info-sheet-template>
+
     <info-sheet-template *ngSwitchCase="'backup-later-warning'" type="warning">
       <span sheet-title-text translate>Do this later?</span>
       <span sheet-text translate>

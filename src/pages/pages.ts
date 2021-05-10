@@ -31,6 +31,7 @@ import { VoucherPage } from '../pages/voucher/voucher';
 import { SearchTxModalPage } from '../pages/wallet-details/search-tx-modal/search-tx-modal';
 import { WalletBalanceModal } from '../pages/wallet-details/wallet-balance/wallet-balance';
 import { WalletDetailsPage } from '../pages/wallet-details/wallet-details';
+import { DexPage } from './dex/dex';
 
 // Integrations: Invoice
 import { SelectInvoicePage } from '../pages/integrations/invoice/select-invoice/select-invoice';
@@ -172,6 +173,7 @@ export const PAGES = [
   CoinbaseTxDetailsPage,
   CoinbaseWithdrawPage,
   CopayersPage,
+  DexPage,
   Erc721Page,
   SelectInputsPage,
   FeedbackCardPage,

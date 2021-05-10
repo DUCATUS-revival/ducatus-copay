@@ -45,6 +45,7 @@ import { ProfileProvider } from '../../providers/profile/profile';
 import { SimplexProvider } from '../../providers/simplex/simplex';
 import { WalletProvider } from '../../providers/wallet/wallet';
 import { SelectCurrencyPage } from '../add/select-currency/select-currency';
+import { DexPage } from '../dex/dex';
 
 interface UpdateWalletOptsI {
   walletId: string;
@@ -738,6 +739,10 @@ export class WalletsPage {
 
   public openSwap() {
     this.navCtrl.push(CalculatorPage);
+  }
+
+  public openDex() {
+    this.navCtrl.push(DexPage);
   }
 
   public openVoucher() {

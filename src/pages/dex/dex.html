@@ -1,0 +1,98 @@
+<wide-header-page>
+  <div page-content class="dex-page">
+    <div class="dex-trade">
+      <div class="dex-trade-title">Trade</div>
+      <form class="dex-trade-form" [formGroup]="formGroup">
+        <div class="dex-trade-form-group">
+          <ion-item class="dex-input">
+            <ion-label stacked>{{'From' | translate}}</ion-label>
+            <ion-input
+              type="number"
+              formControlName="from"
+              [value]="formGroup.value.from"
+              data-input="from"
+              (click)="selectInput('from')"
+              (ionChange)="changeAmount('from')"
+              required
+            >
+            </ion-input>
+          </ion-item>
+          <div class="dex-list">
+            <span class="dex-list-title">{{ coin.from.short }}</span>
+            <div (click)="openList('from')" class="dex-list-image">
+              <img
+                width="11"
+                height="6.5"
+                src="assets/img/dex/select-down.svg"
+              />
+              <!--
+                <span
+                  class="dex-list-image-coin"
+                  [style.background]="'url(assets/img/dex/'+ coin.from.short +'.svg)'"
+                ></span>
+              -->
+              <img
+                width="44"
+                height="44"
+                [src]="'assets/img/dex/'+ coin.from.short +'.svg'"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="dex-trade-form-coin-switch">
+          <hr />
+          <div (click)="switchCoin()" class="dex-trade-form-coin-switch-button">
+            <img src="assets/img/dex/switch-coin.svg" />
+          </div>
+        </div>
+        <div class="dex-trade-form-group">
+          <ion-item class="dex-input">
+            <ion-label stacked>{{'To' | translate}}</ion-label>
+            <ion-input
+              type="number"
+              formControlName="to"
+              [value]="formGroup.value.to"
+              (click)="selectInput('to')"
+              data-input="to"
+              (ionChange)="changeAmount('to')"
+              required
+            >
+            </ion-input>
+          </ion-item>
+          <div class="dex-list">
+            <span class="dex-list-title">{{ coin.to.short }}</span>
+            <div (click)="openList('to')" class="dex-list-image">
+              <img
+                width="11"
+                height="6.5"
+                src="assets/img/dex/select-down.svg"
+              />
+              <img
+                width="44"
+                height="44"
+                [src]="'assets/img/dex/'+ coin.to.short +'.svg'"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="dex-trade-form-price-switch">
+          <span>{{'Price' | translate }}</span>
+          <div class="dex-trade-form-price-switch-button">
+            <img src="assets/img/dex/switch-price.svg" />
+          </div>
+          <span
+            >{{ price[coin.to.short] }} {{ coin.from.short }} {{ 'per' |
+            translate }} {{ coin.to.short }}</span
+          >
+        </div>
+        <button
+          ion-button
+          class="button-standard dex-trade-form-button"
+          [disabled]="!formGroup.valid && !price"
+        >
+          {{'Trade' | translate}}
+        </button>
+      </form>
+    </div>
+  </div>
+</wide-header-page>

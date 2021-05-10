@@ -8,14 +8,28 @@ import { InfoSheetTemplate } from './info-sheet-template';
   templateUrl: 'info-sheet.html'
 })
 export class InfoSheetComponent extends ActionSheetParent {
-  @ViewChild(InfoSheetTemplate)
-  infoSheetTemplate: InfoSheetTemplate;
+  @ViewChild(InfoSheetTemplate) infoSheetTemplate: InfoSheetTemplate;
+
+  public savelist: any = {};
+
   constructor(private externalLinkProvider: ExternalLinkProvider) {
     super();
   }
   ngAfterViewInit() {
     this.infoSheetTemplate.onDismiss.subscribe(option => {
       this.dismiss(option);
+    });
+  }
+
+  public filterList(ev: any) {
+    let val = ev.target.value;
+
+    if (!this.savelist.list) {
+      this.savelist.list = this.params.list;
+    }
+
+    this.params.list = this.savelist.list.filter((item: { name: string }) => {
+      return item.name.toLowerCase().indexOf(val.toLowerCase()) > -1;
     });
   }
 
