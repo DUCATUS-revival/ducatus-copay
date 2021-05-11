@@ -123,11 +123,11 @@
 
       <span sheet-text>
         <ion-searchbar
-          style="box-shadow: none; padding-top: 0; background: white;"
+          style="box-shadow: none; padding: 0; margin-bottom: 25px; background: white; position: absolute;top: 75px;"
           (ionInput)="filterList($event)"
         ></ion-searchbar>
 
-        <ion-list>
+        <ion-list style="overflow: scroll;max-height: 70vh;padding-top: 50px;">
           <div
             style="display: flex; align-items: center; margin-top: 20px; cursor: poiner;"
             *ngFor="let item of params.list"
