@@ -1,6 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActionSheetProvider } from '../../providers';
+import { ActionSheetProvider, ApiProvider } from '../../providers';
 
 interface ITradeList {
   name: string;
@@ -20,6 +21,12 @@ interface ICoin {
   to: ICoinItem;
 }
 
+interface IRates {
+  [index: string]: {
+    [index: string]: string;
+  };
+}
+
 interface IPrice {
   [name: string]: number;
 }
@@ -28,50 +35,6 @@ interface IPrice {
 // * Dont forget to create waiting loader for this API to show it in template
 const tradeList: ITradeList[] = [
   { name: 'Binance', short: 'BNB' },
-  { name: 'Ethereum', short: 'ETH' },
-  { name: 'Tether', short: 'USDT' },
-  { name: 'Dai', short: 'DAI' },
-  { name: 'Ripple', short: 'XRP' },
-  { name: 'Ethereum', short: 'ETH' },
-  { name: 'Tether', short: 'USDT' },
-  { name: 'Dai', short: 'DAI' },
-  { name: 'Ripple', short: 'XRP' },
-  { name: 'Ethereum', short: 'ETH' },
-  { name: 'Tether', short: 'USDT' },
-  { name: 'Dai', short: 'DAI' },
-  { name: 'Ripple', short: 'XRP' },
-  { name: 'Ethereum', short: 'ETH' },
-  { name: 'Tether', short: 'USDT' },
-  { name: 'Dai', short: 'DAI' },
-  { name: 'Ripple', short: 'XRP' },
-  { name: 'Ethereum', short: 'ETH' },
-  { name: 'Tether', short: 'USDT' },
-  { name: 'Dai', short: 'DAI' },
-  { name: 'Ripple', short: 'XRP' },
-  { name: 'Ethereum', short: 'ETH' },
-  { name: 'Tether', short: 'USDT' },
-  { name: 'Dai', short: 'DAI' },
-  { name: 'Ripple', short: 'XRP' },
-  { name: 'Ethereum', short: 'ETH' },
-  { name: 'Tether', short: 'USDT' },
-  { name: 'Dai', short: 'DAI' },
-  { name: 'Ripple', short: 'XRP' },
-  { name: 'Ethereum', short: 'ETH' },
-  { name: 'Tether', short: 'USDT' },
-  { name: 'Dai', short: 'DAI' },
-  { name: 'Ripple', short: 'XRP' },
-  { name: 'Ethereum', short: 'ETH' },
-  { name: 'Tether', short: 'USDT' },
-  { name: 'Dai', short: 'DAI' },
-  { name: 'Ripple', short: 'XRP' },
-  { name: 'Ethereum', short: 'ETH' },
-  { name: 'Tether', short: 'USDT' },
-  { name: 'Dai', short: 'DAI' },
-  { name: 'Ripple', short: 'XRP' },
-  { name: 'Ethereum', short: 'ETH' },
-  { name: 'Tether', short: 'USDT' },
-  { name: 'Dai', short: 'DAI' },
-  { name: 'Ripple', short: 'XRP' },
   { name: 'Ethereum', short: 'ETH' },
   { name: 'Tether', short: 'USDT' },
   { name: 'Dai', short: 'DAI' },
@@ -104,10 +67,13 @@ export class DexPage {
   public coin: ICoin = {} as ICoin;
   public price: IPrice = price;
   public inputType: string = 'from';
+  public priceToshow: string = 'to';
 
   constructor(
     private formBuilder: FormBuilder,
-    private actionSheetProvider: ActionSheetProvider
+    private actionSheetProvider: ActionSheetProvider,
+    private httpClient: HttpClient,
+    private apiProvider: ApiProvider
   ) {
     this.formGroup = this.formBuilder.group({
       from: [
@@ -122,6 +88,28 @@ export class DexPage {
 
     this.coin.from = this.findCoin('WDUCX');
     this.coin.to = this.findCoin('BNB');
+  }
+
+  ionViewWillEnter() {
+    const promises = [this.loadCoins(), this.loadRate('WDUCX', 'BNB')];
+
+    Promise.all(promises).then((res: [IRates, IRates]) => {
+      console.log('full result', res);
+      console.log('coins result', res[0]);
+      console.log('rates result', res[1]);
+    });
+  }
+
+  private loadCoins() {
+    return this.httpClient
+      .get(this.apiProvider.getAddresses().ducatuscoins + '/api/v1/rates')
+      .toPromise();
+  }
+
+  private loadRate(_from: string, _to: string) {
+    return this.httpClient
+      .get(this.apiProvider.getAddresses().ducatuscoins + '/api/v1/rates')
+      .toPromise();
   }
 
   private findCoin(shortName: string): ICoinItem {
@@ -147,6 +135,10 @@ export class DexPage {
 
     this.inputType = from.input;
     this.changeAmount(from.input);
+  }
+
+  public switchPrice() {
+    this.priceToshow = this.priceToshow === 'to' ? 'from' : 'to';
   }
 
   public changeAmount(type: string): void {
@@ -180,7 +172,7 @@ export class DexPage {
     infoSheet.onDidDismiss((option: ICoinItem) => {
       if (option) {
         if (this.coin[rType].name === option.name) {
-          this.coin[rType].name = this.coin[type];
+          this.coin[rType] = this.coin[type];
         }
 
         this.coin[type] = option;

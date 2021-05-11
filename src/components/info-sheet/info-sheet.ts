@@ -39,6 +39,7 @@ export class InfoSheetComponent extends ActionSheetParent {
   }
 
   public optionClicked(option, item): void {
+    this.savelist = {};
     this.dismiss(option, item);
   }
 }

@@ -77,12 +77,16 @@
         </div>
         <div class="dex-trade-form-price-switch">
           <span>{{'Price' | translate }}</span>
-          <div class="dex-trade-form-price-switch-button">
+          <div
+            class="dex-trade-form-price-switch-button"
+            (click)="switchPrice();"
+          >
             <img src="assets/img/dex/switch-price.svg" />
           </div>
           <span
-            >{{ price[coin.to.short] }} {{ coin.from.short }} {{ 'per' |
-            translate }} {{ coin.to.short }}</span
+            >{{ price[coin[priceToshow].short] }} {{ coin[priceToshow === 'to' ?
+            'from' : 'to'].short }} {{ 'per' | translate }} {{
+            coin[priceToshow].short }}</span
           >
         </div>
         <button
